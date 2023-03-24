@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h2>Programa Situação da turma</h2>
+    <hr>
+    <p>
+        Nome do aluno: 
+        <input type="text" id="inNome">
+    </p>
+    <p>
+        1° Nota do aluno:
+        <input type="number" id="inNota1">
+    </p>
+    <p>
+        2° Nota do aluno: 
+        <input type="number" id="inNota2">
+    </p>
+    
+    <p id="mediaA"></p>
+    <p id="mensagem"></p>
+    <p id="mediaS"></p>
+
+    <button id="mediaAluno">Exibir média Aluno</button>
+    <button id="mediaTurma">Exibir média da Turma</button>
+
+    
+
+    <script>
+        let notas = []
+        const mediaAluno = document.querySelector('#mediaAluno')
+        const mediaTurma = document.querySelector('#mediaTurma')
+        
+        
+        mediaAluno.addEventListener('click', function(){
+            let nota1 = parseFloat(inNota1.value) 
+            let nota2 = parseFloat(inNota2.value)
+
+            console.log(inNota1.value)
+            console.log(inNota2.value)
+            
+            if(isNaN(nota1) ||isNaN(nota2) ||nota1 === '' || nota2 === ''){
+                alert('\n ou não deixe o campo vazio')
+            }else{
+                if(nota1 > 10 || nota2 > 10){
+                    alert('Não coloque notas maiores que 10 nos  campos de nota!')
+                }else{
+                    let nome = inNome.value
+                    let nota1 = parseFloat(inNota1.value) 
+                    let nota2 = parseFloat(inNota2.value) 
+                    let notaFinal = (nota1+nota2)/2
+
+                    console.log(nota1)
+                    console.log(nota2)
+                    console.log(nome)
+                    console.log(notaFinal)
+
+                    mensagem = document.querySelector('#mensagem')
+
+                    if(notaFinal<3){
+                        mensagem.style.color = 'red'
+                        mensagem.textContent = `Sua nota foi: ${notaFinal}\nVocê foi reprovado`
+                        notas.push(notaFinal)
+                    }else if(notaFinal<=7){
+                        mensagem.style.color = 'green'
+                        mensagem.textContent = `Sua nota foi: ${notaFinal}\nVocê ficou em recuperação`
+                        notas.push(notaFinal)
+                    }else{
+                        mensagem.style.color = 'blue'
+                        mensagem.textContent = `Sua nota foi: ${notaFinal}\nVocê foi Aprovado`
+                        notas.push(notaFinal)
+                    }
+                }
+            }
+
+        })
+            console.log(notas)
+        mediaTurma.addEventListener('click',function(){
+            mediaSala = 0
+            if(notas.length == 0){
+                alert('Não há média de nenhum aluna para poder fazer a média da sala!')
+            }else{
+                for(i=0; i< notas.length; i++){
+                    mediaSala += notas[i]
+                }
+                mediaSala = mediaSala/notas.length
+                alert(`A média da sua sala foi: ${mediaSala}`)
+            }
+        })
+    </script>
+</body>
+</html>
